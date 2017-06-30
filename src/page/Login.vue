@@ -17,13 +17,14 @@
               <el-button type="primary" style="width:100%" @click="submitForm('form1')">登陆</el-button>
             </el-form-item>
             <el-form-item>
-              <p class="login-bot-tip"><a>尚无账号,去注册</a></p>
+              <p class="login-bot-tip"><a @click="goToRegister" @goToLogin="goToRegister">尚无账号,去注册</a></p>
             </el-form-item>
           </el-form>
         </div>
       </transition>
+      <Register :showForm="rshowForm"></Register>
     </div>
-    <input type="button" name="" value="button" @click="shownoform">
+    <!--<input type="button" name="" value="button" @click="shownoform">-->
   </div>
 </template>
 <script>
@@ -32,6 +33,7 @@
   } from '@/api/getData'
   // 这是个模块，即使最后的.css，也依然是在这个地方import，而不是在下面@import
   import 'normalize.css'
+  import Register from '@/page/register'
   // 必须要有这个，即使没有内容
   export default {
     name: 'login',
@@ -57,22 +59,34 @@
         showForm: false
       }
     },
+    computed: {
+      rshowForm () {
+        return !this.showForm
+      }
+    },
     mounted () {
       this.showForm = true
     },
+    components: {
+      Register
+    },
     methods: {
-      submitForm (formname) {
-        this.$refs[formname].validate((valid) => {
+      async submitForm (formname) {
+        this.$refs[formname].validate(async (valid) => {
           console.log(valid)
           if (valid) {
-            login(this.form)
-            this.$message.success('登陆成功')
+            const res = await login(this.form)
+            if (res.success) {
+              this.$message.success('登陆成功')
+            } else {
+              this.$message.error(res.error_msg)
+            }
           } else {
             return false
           }
         })
       },
-      shownoform () {
+      goToRegister () {
         this.showForm = !this.showForm
       }
     }
@@ -109,10 +123,13 @@
         color: #236554
       }
     }
-    .form-fade-enter,
+    .form-fade-enter{
+      opacity: 0;
+      transform: rotate(90deg);
+    }
     .form-fade-leave-active {
       opacity: 0;
-      transform: translate3d(0, -50px, 0);
+      transform: rotate(-90deg);;
     }
     .form-fade-enter-active,
     .form-fade-leave-active {
