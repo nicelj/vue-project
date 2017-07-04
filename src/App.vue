@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="container">
     <router-view></router-view>
   </div>
 </template>
@@ -11,15 +11,15 @@ export default {
 </script>
 
 <style>
+  @import './assets/common.scss';
 body,html{
   height: 100%;
   width: 100%;
 }
-#app {
+#container {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background: #324057;
   height: 100%;
   width: 100%;
 }

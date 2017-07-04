@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id="app">
     <div class="login-page">
       <transition name="form-fade" mode="in-out">
         <div v-show="showForm">
@@ -72,12 +72,15 @@
     },
     methods: {
       async submitForm (formname) {
-        this.$refs[formname].validate(async (valid) => {
+        this.$refs[formname].validate(async(valid) => {
           console.log(valid)
           if (valid) {
             const res = await login(this.form)
             if (res.success) {
               this.$message.success('登陆成功')
+              console.log(this)
+              sessionStorage.setItem('username', res.loginname)
+              this.$router.push('index')
             } else {
               this.$message.error(res.error_msg)
             }
@@ -98,7 +101,16 @@
     这个地方使用@方式是不行的
     */
 
-  @import '../assets/login.scss';
+  @import '../assets/common.scss';
+  #app {
+    font-family: 'Avenir', Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background: #324057;
+    height: 100%;
+    width: 100%;
+  }
+
   div.login-page {
     background: #fff;
     height: 210px;
@@ -123,13 +135,14 @@
         color: #236554
       }
     }
-    .form-fade-enter{
+    .form-fade-enter {
       opacity: 0;
       transform: rotate(90deg);
     }
     .form-fade-leave-active {
       opacity: 0;
-      transform: rotate(-90deg);;
+      transform: rotate(-90deg);
+      ;
     }
     .form-fade-enter-active,
     .form-fade-leave-active {
