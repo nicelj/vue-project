@@ -4,6 +4,7 @@ import Index from '@/page/index'
 import Login from '@/page/Login'
 import Topics from '@/page/topics.vue'
 import TopicDetail from '@/page/topicdetail'
+import NewTopic from '@/page/newtopic'
 
 Vue.use(Router)
 // const Login = (resolve) => {require.ensure()}
@@ -32,6 +33,10 @@ export default new Router({
         {
           path: '/topicdetail',
           component: TopicDetail
+        },
+        {
+          path: '/newtopic',
+          component: NewTopic
         }
       ]
     }

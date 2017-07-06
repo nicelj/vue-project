@@ -34,8 +34,8 @@
         </header>
         <ul style="list-style:none">
             <li v-for="topicbody.replies && (item,index) in topicbody.replies">
-                <el-row style="border:1px solid #ccc" :class="{noborder:index != topicbody.replies.length-1}">
-                    <img style="width:50px" src="item.author.avatar_url" alt="avatar"/>
+                <el-row style="border:1px solid #ccc;padding:8px 0 0 8px" :class="{noborder:index != topicbody.replies.length-1}">
+                    <img style="width:50px;vertical-align: middle" :src="item.author.avatar_url" alt="avatar"/>
                     <span style="color:#A0522D">{{item.author.loginname}}&nbsp;</span>
                     <span style="color:#08c">{{(index+1)+'楼'}}&nbsp;
                         {{item.create_at && item.create_at.split('T')[0]}}</span>
@@ -48,7 +48,7 @@
 </template>
 <script>
   import {
-    getTopicDetail, collect, getUser
+    getTopicDetail, collect, getUser, cancelCollect
   } from '@/api/getData'
   export default {
     name: 'topicdetail',
@@ -70,9 +70,9 @@
         return false
       }
       let results = await Promise.all([getTopicDetail(this.$route.query.id), getUser(sessionStorage.username)])
-      let topicid = results[0].id
+      let topicid = results[0].data.id
       this.collected = this.isCollected(topicid, results[1].data)
-      console.log(results, '========')
+      console.log(this.collected, '========')
       this.topicbody = results[0].data
     },
     methods: {
@@ -80,19 +80,27 @@
         let result = await collect(this.$route.query.id)
         if (result.success) {
           this.$message.success('收藏成功')
+          this.collected = true
         } else {
           this.$message.error('收藏失败')
         }
       },
       isCollected (topicid, user) {
         for (let i = 0; i < user.collect_topics.length; i++) {
-          if (topicid === user.id) {
+          if (topicid === (user.collect_topics)[i].id) {
             return true
           }
         }
         return false
       },
-      cancelcollect () {
+      async cancelcollect () {
+        let result = await cancelCollect(this.$route.query.id)
+        if (result.success) {
+          this.$message.success('取消成功')
+          this.collected = false
+        } else {
+          this.$message.error('取消失败')
+        }
       }
     }
   }

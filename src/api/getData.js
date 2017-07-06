@@ -23,10 +23,20 @@ export const collect = (id) => {
   let url = '/topic/collect'
   return fetchData(url, 'POST', {topic_id: id, accesstoken: token})
 }
+// 取消收藏
+export const cancelCollect = (id) => {
+  let url = '/topic/de_collect'
+  return fetchData(url, 'POST', {topic_id: id, accesstoken: token})
+}
 // 获取用户详情
 export const getUser = (username) => {
   let url = '/user/' + username
   return fetchData(url, 'GET')
+}
+// 新建主题
+export const addTopic = (payload) => {
+  let url = '/topics'
+  return fetchData(url, 'POST', {...payload, ...{accesstoken: token}})
 }
 const fetchData = (url, method = 'GET', options = {}) => {
   url = '/api' + url + '?'
