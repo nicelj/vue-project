@@ -12,7 +12,7 @@ export default new Router({
     {
       path: '/',
       name: 'main',
-      component: Login
+      component: (resolve) => require.ensure([], () => { resolve(require('@/page/Login')) }, 'login')
     },
     {
       path: '/login',
