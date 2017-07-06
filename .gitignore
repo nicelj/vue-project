@@ -58,4 +58,6 @@ typings/
 # dotenv environment variables file
 .env
 
+.idea
+
 >>>>>>> 21c18d94011360ee7a8ac501b22383c2c7e229d0
