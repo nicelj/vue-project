@@ -88,6 +88,17 @@
             return false
           }
         })
+//        fetch('http://localhost:3000/sss', {
+//          method: 'PUT',
+//          headers: {
+//            'Content-Type': 'application/json'
+//          },
+//          body: JSON.stringify({
+//            name: 'Max'
+//          })
+//        }).then((response) => response.json()).then((json) => {
+//          console.log(json)
+//        })
       },
       goToRegister () {
         this.showForm = !this.showForm
