@@ -1,11 +1,11 @@
 <template>
   <div id="app">
     <div class="login-page">
+      <div class="login-page-tip">
+        welcome to Vuejs.com
+      </div>
       <transition name="form-fade" mode="in-out">
         <div v-show="showForm">
-          <div class="login-page-tip">
-            welcome to Vuejs.com
-          </div>
           <el-form :model="form" :rules="rules" ref="form1">
             <el-form-item prop="username">
               <el-input v-model="form.username" placeholder="用户名"></el-input>
@@ -80,7 +80,7 @@
               this.$message.success('登陆成功')
               console.log(this)
               sessionStorage.setItem('username', res.loginname)
-              this.$router.push('index')
+              this.$router.push('topics')
             } else {
               this.$message.error(res.error_msg)
             }
@@ -137,12 +137,11 @@
     }
     .form-fade-enter {
       opacity: 0;
-      transform: rotate(90deg);
+      transform: rotate(90deg) translateY(900px);
     }
-    .form-fade-leave-active {
+    .form-fade-leave-to {
       opacity: 0;
-      transform: rotate(-90deg);
-      ;
+      transform: rotate(-90deg) translateY(900px);
     }
     .form-fade-enter-active,
     .form-fade-leave-active {

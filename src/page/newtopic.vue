@@ -41,7 +41,7 @@
       </el-col>
       <el-col :span="18">
         <div>
-          <mavon-editor v-model="content"/>
+          <!--<mavon-editor v-model="content"/>-->
         </div>
       </el-col>
     </el-row>

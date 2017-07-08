@@ -12,7 +12,7 @@
       </el-submenu>
       <el-submenu index="2">
         <template slot="title"><i class="el-icon-message"></i>消息</template>
-        <el-menu-item index="collection">全部消息</el-menu-item>
+        <el-menu-item index="message">全部消息</el-menu-item>
       </el-submenu>
       <el-submenu index="3">
         <template slot="title"><i class="el-icon-information"></i>关于我的</template>

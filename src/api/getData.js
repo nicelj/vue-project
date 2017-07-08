@@ -38,6 +38,21 @@ export const addTopic = (payload) => {
   let url = '/topics'
   return fetchData(url, 'POST', {...payload, ...{accesstoken: token}})
 }
+// 获取已读和未读消息
+export const getMessages = () => {
+  let url = '/messages'
+  return fetchData(url, 'GET', {accesstoken: token})
+}
+// 获取未读消息数量
+export const getUnreadMessagesCount = () => {
+  let url = '/message/count'
+  return fetchData(url, 'GET', {accesstoken: token})
+}
+// 标记全部已读
+export const markRead = () => {
+  let url = '/message/mark_all'
+  return fetchData(url, 'POST', {accesstoken: token})
+}
 const fetchData = (url, method = 'GET', options = {}) => {
   url = '/api' + url + '?'
   let body = {

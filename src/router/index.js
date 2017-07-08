@@ -5,6 +5,9 @@ import Login from '@/page/Login'
 import Topics from '@/page/topics.vue'
 import TopicDetail from '@/page/topicdetail'
 import NewTopic from '@/page/newtopic'
+import Message from '@/page/message'
+import Collect from '@/page/collect'
+import Aboutme from '@/page/aboutme'
 
 Vue.use(Router)
 // const Login = (resolve) => {require.ensure()}
@@ -37,6 +40,18 @@ export default new Router({
         {
           path: '/newtopic',
           component: NewTopic
+        },
+        {
+          path: '/message',
+          component: Message
+        },
+        {
+          path: '/collection',
+          component: Collect
+        },
+        {
+          path: '/aboutme',
+          component: Aboutme
         }
       ]
     }
