@@ -22,7 +22,7 @@
                 创建于{{topicbody.create_at && topicbody.create_at.split('T')[0]}} &nbsp;&nbsp;
                 作者:{{topicbody.author && topicbody.author.loginname}} &nbsp;&nbsp;
                 {{topicbody.visit_count}}次浏览 &nbsp;&nbsp;
-                来自&nbsp<span style="color:#8B1A1A">{{topicbody.tab && tabs[topicbody.tab]}}</span>
+                来自&nbsp;<span style="color:#8B1A1A">{{topicbody.tab && tabs[topicbody.tab]}}</span>
             </p>
         </div>
         <div  v-html="topicbody.content"></div>
@@ -33,7 +33,7 @@
             {{topicbody.reply_count}} &nbsp;回复
         </header>
         <ul style="list-style:none">
-            <li v-for="topicbody.replies && (item,index) in topicbody.replies">
+            <li v-for="(item,index) in topicbody.replies" :key="index">
                 <el-row style="border:1px solid #ccc;padding:8px 0 0 8px" :class="{noborder:index != topicbody.replies.length-1}">
                     <img style="width:50px;vertical-align: middle" :src="item.author.avatar_url" alt="avatar"/>
                     <span style="color:#A0522D">{{item.author.loginname}}&nbsp;</span>
